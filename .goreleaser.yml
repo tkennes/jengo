@@ -1,0 +1,35 @@
+project_name: jengo
+release:
+  github:
+    owner: tomkennes
+    name: jengo
+brews:
+  -
+    install: bin.install "jengo"
+env:
+  - CGO_ENABLED=0
+builds:
+- goos:
+    - linux
+    - darwin
+    - windows
+  goarch:
+    - amd64
+    - "386"
+  goarm:
+    - "6"
+  main: ./main.go
+  ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+  binary: jengo
+archives:
+  -
+    format: tar.gz
+    name_template: '{{ .Binary }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{
+    .Arm }}{{ end }}'
+    files:
+      - COPYING
+      - README*
+snapshot:
+  name_template: SNAPSHOT-{{ .Commit }}
+checksum:
+  name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
