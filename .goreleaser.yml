@@ -1,35 +1,32 @@
-project_name: jengo
-release:
-  github:
-    owner: tomkennes
-    name: jengo
-brews:
-  -
-    install: bin.install "jengo"
-env:
-  - CGO_ENABLED=0
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod download
+    # you may remove this if you don't need go generate
+    - go generate ./...
 builds:
-- goos:
-    - linux
-    - darwin
-    - windows
-  goarch:
-    - amd64
-    - "386"
-  goarm:
-    - "6"
-  main: ./main.go
-  ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
-  binary: jengo
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
 archives:
-  -
-    format: tar.gz
-    name_template: '{{ .Binary }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{
-    .Arm }}{{ end }}'
-    files:
-      - COPYING
-      - README*
-snapshot:
-  name_template: SNAPSHOT-{{ .Commit }}
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
 checksum:
-  name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
