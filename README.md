@@ -44,7 +44,7 @@ current: localhost
 contexts: 
  - name: localhost
    url: "http://localhost:8080"
-   username: "admin"
+   username: "<username>"
    token:    "<token>"
 ```
 
