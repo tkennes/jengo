@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/tomkennes/jengo/common"
+	src "github.com/tomkennes/jengo/src"
 )
 
 var BuildsCmd = &cobra.Command{
@@ -10,7 +10,7 @@ var BuildsCmd = &cobra.Command{
 	Short: "Get builds",
 	Run: func(cmd *cobra.Command, args []string) {
 		for _, job := range args {
-			common.TableBuilds(common.ListBuilds(job))
+			src.TableBuilds(src.ListBuilds(job))
 		}
 	},
 }

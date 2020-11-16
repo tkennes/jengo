@@ -1,10 +1,11 @@
-package common
+package jengo_src
 
 import (
-	"github.com/olekukonko/tablewriter"
-	"gopkg.in/yaml.v2"
 	"log"
 	"os"
+
+	"github.com/olekukonko/tablewriter"
+	"gopkg.in/yaml.v2"
 )
 
 func TableJobs(jobs [][]string) {

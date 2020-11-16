@@ -1,4 +1,4 @@
-package common
+package jengo_src
 
 import (
 	"encoding/json"
@@ -6,8 +6,6 @@ import (
 	"log"
 	"strconv"
 	"strings"
-
-	jclient "github.com/tomkennes/jengo/client"
 )
 
 type JobL struct {
@@ -114,7 +112,7 @@ func prepare_job_response(obj JobRawResponse) (out_obj JobResponse) {
 }
 
 func prepare_url(url string) string {
-	base_url := jclient.GetBaseURL()
+	base_url := GetBaseURL()
 	return strings.ReplaceAll(url, base_url, "")
 }
 

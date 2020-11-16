@@ -1,4 +1,4 @@
-package common
+package jengo_src
 
 import (
 	"errors"
@@ -6,8 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-
-	jclient "github.com/tomkennes/jengo/client"
 )
 
 type Kwargs map[string]interface{}
@@ -30,7 +28,7 @@ func GetEndpoint(Kwargs map[string]interface{}) string {
 }
 
 func HandleRequest(METHOD string, Kwargs map[string]interface{}) ([]byte, error) {
-	req := jclient.CreateRequest(METHOD, GetEndpoint(Kwargs))
+	req := CreateRequest(METHOD, GetEndpoint(Kwargs))
 	// Send req using http Client
 	client := &http.Client{}
 	response, err := client.Do(req)

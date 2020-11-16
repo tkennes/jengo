@@ -1,4 +1,4 @@
-package client
+package jengo_src
 
 import (
 	"bytes"
