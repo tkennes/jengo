@@ -117,13 +117,11 @@ brews:
     # Default is empty.
     plist: |
       <?xml version="1.0" encoding="UTF-8"?>
-      ...
 
     # So you can `brew test` your formula.
     # Default is empty.
     test: |
       system "false"
-      ...
 
     # Custom install script for brew.
     # Default is 'bin.install "program"'.
@@ -131,5 +129,3 @@ brews:
       system "go", "build", "-ldflags",
               "-s -w -X main.version=#{version} -X main.commit=#{stable.specs[:revision]} -X main.builtBy=homebrew",
               *std_go_args
-      ...
-
