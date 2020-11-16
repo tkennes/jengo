@@ -2,7 +2,6 @@ package jengo_src
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -74,7 +73,7 @@ func ListJobs() (res [][]string) {
 	for _, job := range obj.Jobs {
 		res = append(res, []string{job.Name,
 			job.Color, strconv.FormatBool(job.Buildable),
-			prepare_url(job.URL), job.Description})
+			PrepareUrl(job.URL), job.Description})
 	}
 	return
 }
@@ -111,11 +110,7 @@ func prepare_job_response(obj JobRawResponse) (out_obj JobResponse) {
 	return
 }
 
-func prepare_url(url string) string {
+func PrepareUrl(url string) string {
 	base_url := GetBaseURL()
 	return strings.ReplaceAll(url, base_url, "")
-}
-
-func m() {
-	fmt.Println()
 }
