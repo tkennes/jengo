@@ -1,21 +1,16 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
-	"github.com/tomkennes/jengo/common"
+	src "github.com/tkennes/jengo/src"
 )
 
 var JobCmd = &cobra.Command{
 	Use:   "job",
 	Short: "Get job info",
 	Run: func(cmd *cobra.Command, args []string) {
-		for i, job := range args {
-			if i > 0 {
-				fmt.Println("---\n")
-			}
-			common.YAMLJob(common.GetJob(job))
+		for _, job := range args {
+			src.YAMLJob(src.GetJob(job))
 		}
 	},
 }

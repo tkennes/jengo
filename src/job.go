@@ -1,13 +1,9 @@
-package common
+package jengo_src
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
 	"strconv"
 	"strings"
-
-	jclient "github.com/tomkennes/jengo/client"
 )
 
 type JobL struct {
@@ -64,32 +60,32 @@ type JobListResponse struct {
 }
 
 func ListJobs() (res [][]string) {
-	responseData, err := HandleRequest("GET", kwargs{"name": "jobs"})
+	responseData, err := HandleRequest("GET", Kwargs{"name": "jobs"})
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 
 	var obj JobListResponse
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	for _, job := range obj.Jobs {
 		res = append(res, []string{job.Name,
 			job.Color, strconv.FormatBool(job.Buildable),
-			prepare_url(job.URL), job.Description})
+			PrepareUrl(job.URL), job.Description})
 	}
 	return
 }
 
 func GetJob(job_name string) (out_obj JobResponse) {
 	var obj JobRawResponse
-	responseData, err := HandleRequest("GET", kwargs{"name": "job_info", "job_name": job_name})
+	responseData, err := HandleRequest("GET", Kwargs{"name": "job_info", "job_name": job_name})
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	out_obj = prepare_job_response(obj)
 	return
@@ -113,11 +109,7 @@ func prepare_job_response(obj JobRawResponse) (out_obj JobResponse) {
 	return
 }
 
-func prepare_url(url string) string {
-	base_url := jclient.GetBaseURL()
+func PrepareUrl(url string) string {
+	base_url := GetBaseURL()
 	return strings.ReplaceAll(url, base_url, "")
-}
-
-func m() {
-	fmt.Println()
 }

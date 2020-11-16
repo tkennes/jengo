@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/tomkennes/jengo/cmd"
+	"github.com/tkennes/jengo/cmd"
 )
 
 func main() {

@@ -1,11 +1,10 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/spf13/cobra"
-	"github.com/tomkennes/jengo/common"
+	src "github.com/tkennes/jengo/src"
 )
 
 var BuildCmd = &cobra.Command{
@@ -17,11 +16,8 @@ var BuildCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		for i, build := range args {
-			if i > 0 {
-				fmt.Println("---\n")
-			}
-			common.YAMLBuild(common.GetBuild(job, build))
+		for _, build := range args {
+			src.YAMLBuild(src.GetBuild(job, build))
 		}
 	},
 }
