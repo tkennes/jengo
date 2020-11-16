@@ -12,7 +12,7 @@ import (
 
 type kwargs map[string]interface{}
 
-func get_endpoint(kwargs map[string]interface{}) string {
+func GetEndpoint(kwargs map[string]interface{}) string {
 	if kwargs["name"] == "jobs" {
 		return "/api/json?tree=jobs[name,color,buildable,url,description]"
 	} else if kwargs["name"] == "job_info" {
@@ -30,7 +30,7 @@ func get_endpoint(kwargs map[string]interface{}) string {
 }
 
 func HandleRequest(METHOD string, kwargs map[string]interface{}) ([]byte, error) {
-	req := jclient.CreateRequest(METHOD, get_endpoint(kwargs))
+	req := jclient.CreateRequest(METHOD, GetEndpoint(kwargs))
 	// Send req using http Client
 	client := &http.Client{}
 	response, err := client.Do(req)
