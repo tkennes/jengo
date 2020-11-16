@@ -2,7 +2,6 @@ package jengo_src
 
 import (
 	"encoding/json"
-	"log"
 	"strconv"
 	"time"
 )
@@ -43,12 +42,12 @@ func ListBuilds(job_name string) (res [][]string) {
 	responseData, err := HandleRequest("GET", Kwargs{"name": "builds", "job_name": job_name})
 
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 
 	var obj BuildListResponse
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	for _, build := range obj.Builds {
 		// Divide by 1000 for seconds in epoch
@@ -70,11 +69,11 @@ func ListBuilds(job_name string) (res [][]string) {
 func GetBuild(job_name string, build_name string) (obj BuildResponse) {
 	responseData, err := HandleRequest("GET", Kwargs{"name": "build_info", "job_name": job_name, "build_name": build_name})
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	return
 }

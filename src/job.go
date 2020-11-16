@@ -2,7 +2,6 @@ package jengo_src
 
 import (
 	"encoding/json"
-	"log"
 	"strconv"
 	"strings"
 )
@@ -63,12 +62,12 @@ type JobListResponse struct {
 func ListJobs() (res [][]string) {
 	responseData, err := HandleRequest("GET", Kwargs{"name": "jobs"})
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 
 	var obj JobListResponse
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	for _, job := range obj.Jobs {
 		res = append(res, []string{job.Name,
@@ -82,11 +81,11 @@ func GetJob(job_name string) (out_obj JobResponse) {
 	var obj JobRawResponse
 	responseData, err := HandleRequest("GET", Kwargs{"name": "job_info", "job_name": job_name})
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	out_obj = prepare_job_response(obj)
 	return

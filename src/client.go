@@ -2,7 +2,6 @@ package jengo_src
 
 import (
 	"bytes"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -75,7 +74,8 @@ func parseYAML(yamlData []byte) (client JenkinsClient, err error) {
 func getFileBytes(fileName string) []byte {
 	f, err := os.Open(fileName)
 	if err != nil {
-		log.Fatalf("Could not open file %s", fileName)
+		Info.Printf("Could not open file %s", fileName)
+		os.Exit(0)
 	}
 
 	// Package bytes implements functions for the manipulation of byte slices. It is analogous to the facilities of the strings package.
@@ -84,7 +84,7 @@ func getFileBytes(fileName string) []byte {
 	buf := new(bytes.Buffer)
 	_, err = buf.ReadFrom(f)
 	if err != nil {
-		log.Fatalf("Could not read file %s", fileName)
+		Error.Printf("Could not read file %s", fileName)
 	}
 
 	return buf.Bytes()

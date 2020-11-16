@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 )
 
@@ -33,7 +32,7 @@ func HandleRequest(METHOD string, Kwargs map[string]interface{}) ([]byte, error)
 	client := &http.Client{}
 	response, err := client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	if response.StatusCode != 200 {
 		return nil, errors.New(fmt.Sprintf("Erorr: %v", response.StatusCode))
@@ -41,7 +40,7 @@ func HandleRequest(METHOD string, Kwargs map[string]interface{}) ([]byte, error)
 	defer response.Body.Close()
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		log.Fatal(err)
+		Error.Println(err)
 	}
 	return responseData, nil
 
