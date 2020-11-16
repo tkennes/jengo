@@ -37,12 +37,6 @@ brews:
     # Default to project name
     name: jengo
 
-    # IDs of the archives to use.
-    # Defaults to all.
-    ids:
-    - foo
-    - bar
-
     # GOARM to specify which 32-bit arm version to use if there are multiple versions
     # from the build section. Brew formulas support atm only one 32-bit version.
     # Default is 6 for all artifacts or each id if there a multiple versions.
