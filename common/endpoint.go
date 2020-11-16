@@ -10,27 +10,27 @@ import (
 	jclient "github.com/tomkennes/jengo/client"
 )
 
-type kwargs map[string]interface{}
+type Kwargs map[string]interface{}
 
-func GetEndpoint(kwargs map[string]interface{}) string {
-	if kwargs["name"] == "jobs" {
+func GetEndpoint(Kwargs map[string]interface{}) string {
+	if Kwargs["name"] == "jobs" {
 		return "/api/json?tree=jobs[name,color,buildable,url,description]"
-	} else if kwargs["name"] == "job_info" {
-		endpoint := fmt.Sprintf("/job/%s/api/json?pretty=true", kwargs["job_name"])
+	} else if Kwargs["name"] == "job_info" {
+		endpoint := fmt.Sprintf("/job/%s/api/json?pretty=true", Kwargs["job_name"])
 		return endpoint
-	} else if kwargs["name"] == "builds" {
-		endpoint := fmt.Sprintf("/job/%s/api/json?tree=builds[number,status,timestamp,id,result,estimatedDuration,duration,executor,description,url]", kwargs["job_name"])
+	} else if Kwargs["name"] == "builds" {
+		endpoint := fmt.Sprintf("/job/%s/api/json?tree=builds[number,status,timestamp,id,result,estimatedDuration,duration,executor,description,url]", Kwargs["job_name"])
 		return endpoint
-	} else if kwargs["name"] == "build" {
-		endpoint := fmt.Sprintf("/job/%s/%s/api/json?pretty=true", kwargs["job_name"], kwargs["build_name"])
+	} else if Kwargs["name"] == "build" {
+		endpoint := fmt.Sprintf("/job/%s/%s/api/json?pretty=true", Kwargs["job_name"], Kwargs["build_name"])
 		return endpoint
 	} else {
 		panic(errors.New("Not possible endpoint"))
 	}
 }
 
-func HandleRequest(METHOD string, kwargs map[string]interface{}) ([]byte, error) {
-	req := jclient.CreateRequest(METHOD, GetEndpoint(kwargs))
+func HandleRequest(METHOD string, Kwargs map[string]interface{}) ([]byte, error) {
+	req := jclient.CreateRequest(METHOD, GetEndpoint(Kwargs))
 	// Send req using http Client
 	client := &http.Client{}
 	response, err := client.Do(req)

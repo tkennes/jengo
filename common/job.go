@@ -64,7 +64,7 @@ type JobListResponse struct {
 }
 
 func ListJobs() (res [][]string) {
-	responseData, err := HandleRequest("GET", kwargs{"name": "jobs"})
+	responseData, err := HandleRequest("GET", Kwargs{"name": "jobs"})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -83,7 +83,7 @@ func ListJobs() (res [][]string) {
 
 func GetJob(job_name string) (out_obj JobResponse) {
 	var obj JobRawResponse
-	responseData, err := HandleRequest("GET", kwargs{"name": "job_info", "job_name": job_name})
+	responseData, err := HandleRequest("GET", Kwargs{"name": "job_info", "job_name": job_name})
 	if err != nil {
 		log.Fatal(err)
 	}

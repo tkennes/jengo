@@ -40,7 +40,7 @@ type BuildListResponse struct {
 }
 
 func ListBuilds(job_name string) (res [][]string) {
-	responseData, err := HandleRequest("GET", kwargs{"name": "builds", "job_name": job_name})
+	responseData, err := HandleRequest("GET", Kwargs{"name": "builds", "job_name": job_name})
 
 	if err != nil {
 		log.Fatal(err)
@@ -68,7 +68,7 @@ func ListBuilds(job_name string) (res [][]string) {
 }
 
 func GetBuild(job_name string, build_name string) (obj BuildResponse) {
-	responseData, err := HandleRequest("GET", kwargs{"name": "build", "job_name": job_name, "build_name": build_name})
+	responseData, err := HandleRequest("GET", Kwargs{"name": "build", "job_name": job_name, "build_name": build_name})
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -2,13 +2,13 @@ package client
 
 import (
 	"bytes"
-	"flag"
-	homedir "github.com/mitchellh/go-homedir"
-	"gopkg.in/yaml.v2"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	homedir "github.com/mitchellh/go-homedir"
+	"gopkg.in/yaml.v2"
 )
 
 type JenkinsClient struct {
@@ -25,17 +25,13 @@ type YAMLConfig struct {
 
 //  Neat way to group input variables
 var (
-	configFile      = flag.String("conf", ".jenkins.yaml", "The file containing shortened paths to URL's")
-	current_context = flag.String("c", "localhost", "The context currently in use")
+	configFile      = ".jenkins.yaml"
+	current_context = "localhost"
 )
-
-func init() {
-	flag.Parse()
-}
 
 func GetClient() JenkinsClient {
 	home, _ := homedir.Dir()
-	jenkins, err := parseYAML(getFileBytes(filepath.Join(home, *configFile)))
+	jenkins, err := parseYAML(getFileBytes(filepath.Join(home, configFile)))
 
 	if err != nil {
 		panic(err)
@@ -96,7 +92,7 @@ func getFileBytes(fileName string) []byte {
 
 func (config YAMLConfig) GetCurrent() JenkinsClient {
 	for _, c := range config.Contexts {
-		if c.Name == *current_context {
+		if c.Name == current_context {
 			return c
 		}
 	}
