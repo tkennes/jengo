@@ -21,7 +21,7 @@ func GetEndpoint(Kwargs map[string]interface{}) string {
 	} else if Kwargs["name"] == "builds" {
 		endpoint := fmt.Sprintf("/job/%s/api/json?tree=builds[number,status,timestamp,id,result,estimatedDuration,duration,executor,description,url]", Kwargs["job_name"])
 		return endpoint
-	} else if Kwargs["name"] == "build" {
+	} else if Kwargs["name"] == "build_info" {
 		endpoint := fmt.Sprintf("/job/%s/%s/api/json?pretty=true", Kwargs["job_name"], Kwargs["build_name"])
 		return endpoint
 	} else {
