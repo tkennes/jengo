@@ -121,6 +121,7 @@ brews:
     # Custom install script for brew.
     # Default is 'bin.install "program"'.
     install: |
-      system "go", "build", "-ldflags",
-               "-s -w -X main.version=#{version} -X main.commit=#{stable.specs[:revision]} -X main.builtBy=homebrew",
-               *std_go_args
+      bin.install "goreleaser"
+    #  system "go", "build", "-ldflags",
+    #           "-s -w -X main.version=#{version} -X main.commit=#{stable.specs[:revision]} -X main.builtBy=homebrew",
+    #           *std_go_args
