@@ -121,7 +121,7 @@ brews:
     # Custom install script for brew.
     # Default is 'bin.install "program"'.
     install: |
-      bin.install "goreleaser"
+      bin.install "jengo"
     #  system "go", "build", "-ldflags",
     #           "-s -w -X main.version=#{version} -X main.commit=#{stable.specs[:revision]} -X main.builtBy=homebrew",
     #           *std_go_args
