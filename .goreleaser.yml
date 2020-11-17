@@ -1,5 +1,6 @@
-# This is an example goreleaser.yaml file with some sane defaults.
-# Make sure to check the documentation at http://goreleaser.com
+##########################################################################################
+# Build
+##########################################################################################
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -32,8 +33,9 @@ changelog:
       - '^test:'
 
 
-
-# .goreleaser.yml
+##########################################################################################
+# Release
+##########################################################################################
 brews:
   -
     # Name template of the recipe
@@ -122,6 +124,3 @@ brews:
     # Default is 'bin.install "program"'.
     install: |
       bin.install "jengo"
-    #  system "go", "build", "-ldflags",
-    #           "-s -w -X main.version=#{version} -X main.commit=#{stable.specs[:revision]} -X main.builtBy=homebrew",
-    #           *std_go_args
