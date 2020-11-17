@@ -30,32 +30,28 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+
+
+
 # .goreleaser.yml
 brews:
   -
     # Name template of the recipe
     # Default to project name
-    name: jengo
+    # name: jengo
 
     # GOARM to specify which 32-bit arm version to use if there are multiple versions
     # from the build section. Brew formulas support atm only one 32-bit version.
     # Default is 6 for all artifacts or each id if there a multiple versions.
     goarm: 6
 
-    # NOTE: make sure the url_template, the token and given repo (github or gitlab) owner and name are from the
-    # same kind. We will probably unify this in the next major version like it is done with scoop.
-
     # GitHub/GitLab repository to push the formula to
-    # Gitea is not supported yet, but the support coming
     tap:
       owner: tkennes
       name: homebrew-jengo
-      # Optionally a token can be provided, if it differs from the token provided to GoReleaser
       token: "{{ .Env.GITHUB_TOKEN }}"
 
     # Template for the url which is determined by the given Token (github or gitlab)
-    # Default for github is "https://github.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
-    # Default for gitlab is "https://gitlab.com/<repo_owner>/<repo_name>/uploads/{{ .ArtifactUploadHash }}/{{ .ArtifactName }}"
     url_template: "http://github.com/tkennes/jengo/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
 
     # Allows you to set a custom download strategy. Note that you'll need
@@ -80,7 +76,7 @@ brews:
 
     # Caveats for the user of your binary.
     # Default is empty.
-    caveats: "Use at your own risk"
+    # caveats: "Use at your own risk"
 
     # Your app's homepage.
     # Default is empty.
@@ -104,19 +100,18 @@ brews:
 
     # Packages your package depends on.
     dependencies:
-      - name: git
-      - name: zsh
-        type: optional
+      - name: go
+        type: build
 
     # Packages that conflict with your package.
-    conflicts:
-      - svn
-      - bash
+    # conflicts:
+    #   - svn
+    #   - bash
 
     # Specify for packages that run as a service.
     # Default is empty.
-    plist: |
-      <?xml version="1.0" encoding="UTF-8"?>
+    # plist: |
+    #   <?xml version="1.0" encoding="UTF-8"?>
 
     # So you can `brew test` your formula.
     # Default is empty.
@@ -127,5 +122,5 @@ brews:
     # Default is 'bin.install "program"'.
     install: |
       system "go", "build", "-ldflags",
-              "-s -w -X main.version=#{version} -X main.commit=#{stable.specs[:revision]} -X main.builtBy=homebrew",
-              *std_go_args
+               "-s -w -X main.version=#{version} -X main.commit=#{stable.specs[:revision]} -X main.builtBy=homebrew",
+               *std_go_args
