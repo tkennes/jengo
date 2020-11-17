@@ -3,7 +3,7 @@
 ## How to Install it
 ### MacOS
 ```
-brew tap tkennes/homebrew-jengo
+brew tap tkennes/jengo
 
 brew install jengo
 ```
