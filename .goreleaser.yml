@@ -62,11 +62,11 @@ brews:
     # to implement the strategy and add it to your tap repository.
     # Example: https://docs.brew.sh/Formula-Cookbook#specifying-the-download-strategy-explicitly
     # Default is empty.
-    download_strategy: CurlDownloadStrategy.
+    # download_strategy: CurlDownloadStrategy.
 
     # Allows you to add a custom require_relative at the top of the formula template
     # Default is empty
-    custom_require: custom_download_strategy
+    # custom_require: custom_download_strategy
 
     # Git author used to commit to the repository.
     # Defaults are shown.
@@ -80,7 +80,7 @@ brews:
 
     # Caveats for the user of your binary.
     # Default is empty.
-    caveats: "How to use this binary"
+    caveats: "Use at your own risk"
 
     # Your app's homepage.
     # Default is empty.
