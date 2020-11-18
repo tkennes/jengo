@@ -118,7 +118,7 @@ brews:
     # So you can `brew test` your formula.
     # Default is empty.
     test: |
-      system "jengo version"
+      system "shell_output(#{bin}/jengo version, result = 0)"
 
     # Custom install script for brew.
     # Default is 'bin.install "program"'.
