@@ -2,5 +2,5 @@ package cmd
 
 
 var (
-	Version := "v1.3.9"
+	Version = "v1.3.9"
 )
