@@ -59,3 +59,19 @@ func YAMLNode(node Computer) {
 	}
 	log.Printf(string(d))
 }
+
+func YAMLPlugins(plugins PluginsResponse) {
+	d, err := yaml.Marshal(&plugins)
+	if err != nil {
+		Error.Println(err)
+	}
+	log.Printf(string(d))
+}
+
+func YAMLPlugin(plugin []Plugin) {
+	d, err := yaml.Marshal(&plugin)
+	if err != nil {
+		Error.Println(err)
+	}
+	log.Printf(string(d))
+}

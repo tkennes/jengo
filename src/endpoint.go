@@ -10,8 +10,9 @@ import (
 type Kwargs map[string]interface{}
 
 func GetEndpoint(Kwargs map[string]interface{}) string {
-	// Jobs
 	switch Kwargs["name"] {
+
+	// Jobs`
 	case "jobs":
 		return "/api/json?tree=jobs[name,color,buildable,url,description]"
 	case "job":
@@ -32,6 +33,10 @@ func GetEndpoint(Kwargs map[string]interface{}) string {
 	case "node":
 		endpoint := fmt.Sprintf("/computer/(%s)/api/json?pretty=true", Kwargs["node_name"])
 		return endpoint
+
+	// Plugins
+	case "plugins":
+		return "/pluginManager/api/json?depth=1"
 
 	// Default: Endpoint not found
 	default:
