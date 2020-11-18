@@ -17,7 +17,7 @@ func TestGetEndpoint_jobs(t *testing.T) {
 func TestGetEndpoint_job(t *testing.T) {
 
 	expectation := "/job/TEST/api/json?pretty=true"
-	result := GetEndpoint(Kwargs{"name": "job_info", "job_name": "TEST"})
+	result := GetEndpoint(Kwargs{"name": "job", "job_name": "TEST"})
 
 	if expectation != result {
 		t.Errorf("Expectation: %s\nResult:      %s", expectation, result)
@@ -36,7 +36,7 @@ func TestGetEndpoint_builds(t *testing.T) {
 func TestGetEndpoint_build(t *testing.T) {
 
 	expectation := "/job/TEST/TEST/api/json?pretty=true"
-	result := GetEndpoint(Kwargs{"name": "build_info", "job_name": "TEST", "build_name": "TEST"})
+	result := GetEndpoint(Kwargs{"name": "build", "job_name": "TEST", "build_name": "TEST"})
 
 	if expectation != result {
 		t.Errorf("Expectation: %s\nResult:      %s", expectation, result)

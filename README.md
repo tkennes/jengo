@@ -62,3 +62,13 @@ jengo jobs
 ```
 jengo builds --job <job-name>
 ```
+
+## Contribute
+We make use of githooks, taken out of the unsynced ./.git/hooks folder and put in the .githooks folder (surprisingly :)). This allows for versioning of githooks as well. There is only a small caveat, you need to adjust your git settings before it is able to pick up this change. If the git your are using is of version 2.29 or above, doing so is fairly simple:
+```
+git config core.hooksPath .githooks
+```
+
+Notice that this only applies to the repository you're currently in.
+
+https://www.viget.com/articles/two-ways-to-share-git-hooks-with-your-team/
