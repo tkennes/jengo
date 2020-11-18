@@ -11,7 +11,8 @@ if [[ ! -z "$tag" ]]; then
 	pat="v[0-9]*.[0-9]*.[0-9]*"
 	if [[ $tag =~ $pat ]]; then
 		echo "Updating configfile"
-		sed -i "s/Version := \"v[0-9]*.[0-9]*.[0-9]*\"/Version := \"$tag\"/g" $configfile
+		tmp=$(mktemp)
+		sed -e "s/Version := \"v[0-9]*.[0-9]*.[0-9]*\"/Version := \"$tag\"/g" $configfile > "$tmp" && mv "$tmp" $configfile
 	else
 		echo "Tag not in the right format (v*.*.*). Not updating configfile: $configfile"
 	fi
