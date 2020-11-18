@@ -13,6 +13,7 @@ if [[ ! -z "$tag" ]]; then
 		echo "Updating configfile"
 		tmp=$(mktemp)
 		variable=$tag; jq --arg variable "$variable" '.version = $variable' $configfile > "$tmp" && mv "$tmp" $configfile
+		git add $configfile
 	else
 		echo "Tag not in the right format (v*.*.*). Not updating configfile: $configfile"
 	fi
