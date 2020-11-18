@@ -79,7 +79,7 @@ func ListJobs() (res [][]string) {
 
 func GetJob(job_name string) (out_obj JobResponse) {
 	var obj JobRawResponse
-	responseData, err := HandleRequest("GET", Kwargs{"name": "job_info", "job_name": job_name})
+	responseData, err := HandleRequest("GET", Kwargs{"name": "job", "job_name": job_name})
 	if err != nil {
 		Error.Println(err)
 	}

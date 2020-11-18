@@ -43,3 +43,19 @@ func YAMLBuild(build BuildResponse) {
 	}
 	log.Printf(string(d))
 }
+
+func YAMLNodes(nodes NodesResponse) {
+	d, err := yaml.Marshal(&nodes)
+	if err != nil {
+		Error.Println(err)
+	}
+	log.Printf(string(d))
+}
+
+func YAMLNode(node Computer) {
+	d, err := yaml.Marshal(&node)
+	if err != nil {
+		Error.Println(err)
+	}
+	log.Printf(string(d))
+}
