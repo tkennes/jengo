@@ -1,16 +1,19 @@
 package jengo_src
 
 import (
-	"log"
 	"os"
+	"log"
 
 	"github.com/olekukonko/tablewriter"
 	"gopkg.in/yaml.v2"
 )
 
-func TableJobs(jobs [][]string) {
+
+func Table(jobs [][]string, header []string) {
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"Name", "Color", "Buildable", "URL", "Description"})
+	table.SetHeader(header)
+	// ALIGN LEFT
+	table.SetAlignment(3)
 
 	for _, v := range jobs {
 		table.Append(v)
@@ -18,60 +21,12 @@ func TableJobs(jobs [][]string) {
 	table.Render()
 }
 
-func TableBuilds(jobs [][]string) {
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader([]string{"ID", "Number", "Time", "Result", "URL", "E_Duration", "Duration", "Description"})
-
-	for _, v := range jobs {
-		table.Append(v)
-	}
-	table.Render()
-}
-
-func YAMLJob(job JobResponse) {
-	d, err := yaml.Marshal(&job)
+func YAML(obj interface{}) {
+	d, err := yaml.Marshal(&obj)
 	if err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
-	Info.Println(string(d))
-}
-
-func YAMLBuild(build BuildResponse) {
-	d, err := yaml.Marshal(&build)
-	if err != nil {
-		Error.Println(err)
-	}
-	log.Printf(string(d))
-}
-
-func YAMLNodes(nodes NodesResponse) {
-	d, err := yaml.Marshal(&nodes)
-	if err != nil {
-		Error.Println(err)
-	}
-	log.Printf(string(d))
-}
-
-func YAMLNode(node Computer) {
-	d, err := yaml.Marshal(&node)
-	if err != nil {
-		Error.Println(err)
-	}
-	log.Printf(string(d))
-}
-
-func YAMLPlugins(plugins PluginsResponse) {
-	d, err := yaml.Marshal(&plugins)
-	if err != nil {
-		Error.Println(err)
-	}
-	log.Printf(string(d))
-}
-
-func YAMLPlugin(plugin []Plugin) {
-	d, err := yaml.Marshal(&plugin)
-	if err != nil {
-		Error.Println(err)
-	}
+	// Log without datetime prefix
+	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 	log.Printf(string(d))
 }

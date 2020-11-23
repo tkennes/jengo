@@ -38,6 +38,19 @@ func GetEndpoint(Kwargs map[string]interface{}) string {
 	case "plugins":
 		return "/pluginManager/api/json?depth=1"
 
+	// Credentials
+	case "credentials":
+		return "/credentials/store/system/domain/_/api/json?pretty=true"
+
+	// Update Center
+	case "update-center":
+		return "/updateCenter/site/default/api/json?pretty=true&depth=1"
+
+	// User
+	case "user":
+		endpoint := fmt.Sprintf("/securityRealm/user/%s/api/json", Kwargs["user_name"])
+		return endpoint
+
 	// Default: Endpoint not found
 	default:
 		panic(errors.New("Not possible endpoint"))
@@ -50,7 +63,7 @@ func HandleRequest(METHOD string, Kwargs map[string]interface{}) ([]byte, error)
 	client := &http.Client{}
 	response, err := client.Do(req)
 	if err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 	if response.StatusCode != 200 {
 		return nil, errors.New(fmt.Sprintf("Erorr: %v", response.StatusCode))
@@ -58,7 +71,7 @@ func HandleRequest(METHOD string, Kwargs map[string]interface{}) ([]byte, error)
 	defer response.Body.Close()
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 	return responseData, nil
 

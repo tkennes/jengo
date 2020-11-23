@@ -81,11 +81,11 @@ type Computer struct {
 func ListNodes() (obj NodesResponse) {
 	responseData, err := HandleRequest("GET", Kwargs{"name": "nodes"})
 	if err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 	return
 }
@@ -98,7 +98,7 @@ func GetNode(node_name string) (obj Computer) {
 
 	fmt.Println(string(responseData))
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 
 	return

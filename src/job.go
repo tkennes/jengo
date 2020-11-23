@@ -62,12 +62,12 @@ type JobListResponse struct {
 func ListJobs() (res [][]string) {
 	responseData, err := HandleRequest("GET", Kwargs{"name": "jobs"})
 	if err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 
 	var obj JobListResponse
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 	for _, job := range obj.Jobs {
 		res = append(res, []string{job.Name,
@@ -81,11 +81,11 @@ func GetJob(job_name string) (out_obj JobResponse) {
 	var obj JobRawResponse
 	responseData, err := HandleRequest("GET", Kwargs{"name": "job", "job_name": job_name})
 	if err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 
 	if err := json.Unmarshal([]byte(responseData), &obj); err != nil {
-		Error.Println(err)
+		ErrorLog(err)
 	}
 	out_obj = prepare_job_response(obj)
 	return
@@ -110,6 +110,6 @@ func prepare_job_response(obj JobRawResponse) (out_obj JobResponse) {
 }
 
 func PrepareUrl(url string) string {
-	base_url := GetBaseURL()
+	base_url := GetBaseURL("")
 	return strings.ReplaceAll(url, base_url, "")
 }

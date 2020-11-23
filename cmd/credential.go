@@ -2,18 +2,17 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-
 	src "github.com/tkennes/jengo/src"
 )
 
-var PluginsCmd = &cobra.Command{
-	Use:   "plugins",
-	Short: "Get plugins",
+var CredentialCmd = &cobra.Command{
+	Use:   "credentials",
+	Short: "Get credentials",
 	Run: func(cmd *cobra.Command, args []string) {
-		src.YAMLPlugins(src.ListPlugins())
+		src.YAML(src.ListCredentials())
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(PluginsCmd)
+	RootCmd.AddCommand(CredentialCmd)
 }

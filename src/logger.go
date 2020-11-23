@@ -3,6 +3,7 @@ package jengo_src
 import (
 	"io"
 	"log"
+	"os"
 )
 
 var (
@@ -12,7 +13,7 @@ var (
 	Error   *log.Logger
 )
 
-func Init(
+func InitLoggers(
 	traceHandle io.Writer,
 	infoHandle io.Writer,
 	warningHandle io.Writer,
@@ -33,4 +34,9 @@ func Init(
 	Error = log.New(errorHandle,
 		"ERROR: ",
 		log.Ldate|log.Ltime|log.Lshortfile)
+}
+
+func ErrorLog(err error) {
+	Error.Println(err)
+	os.Exit(1)
 }

@@ -5,16 +5,16 @@ import (
 	src "github.com/tkennes/jengo/src"
 )
 
-var JobCmd = &cobra.Command{
-	Use:   "job",
-	Short: "Get job info",
+var UserCmd = &cobra.Command{
+	Use:   "user",
+	Short: "Get user",
 	Run: func(cmd *cobra.Command, args []string) {
-		for _, job := range args {
-			src.YAMLJob(src.GetJob(job))
+		for _, user := range args {
+			src.YAML(src.GetUser(user))
 		}
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(JobCmd)
+	RootCmd.AddCommand(UserCmd)
 }
